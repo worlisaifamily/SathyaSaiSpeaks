@@ -16,8 +16,9 @@ title_embeddings = model.encode(df['title'].tolist(), convert_to_tensor=True)
 def index():
     result = None
     if request.method == "POST":
+        
         if "search" in request.form:
-            query = request.form["query"]
++            query = request.form["query"]
             query_embedding = model.encode([query], convert_to_tensor=True)
             similarities = cosine_similarity(query_embedding, title_embeddings)[0]
             best_idx = similarities.argmax()
@@ -41,5 +42,6 @@ def index():
 
 # ✅ Proper block to support both local and Render deployment
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Use PORT from env if set (Render does this)
-    app.run(host="0.0.0.0", port=port, debug=False)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
