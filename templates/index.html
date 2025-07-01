@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Short Finder</title>
+</head>
+<body>
+    <h2>Find Relevant YouTube Short from Sathya Sai Speaks</h2>
+    <form method="post">
+        <input type="text" name="query" placeholder="Enter phrase or question" size="50">
+        <button type="submit" name="search">Search</button>
+        <button type="submit" name="random">Random Short</button>
+    </form>
+
+    {% if result %}
+        <h3>{% if result.mode == "search" %}Best Match{% else %}Random Short{% endif %}:</h3>
+        <p><strong>{{ result.title }}</strong></p>
+        <a href="{{ result.link }}" target="_blank">{{ result.link }}</a>
+        {% if result.score %}
+            <p>Similarity Score: {{ result.score }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
