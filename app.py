@@ -18,7 +18,7 @@ def index():
     if request.method == "POST":
         
         if "search" in request.form:
-+            query = request.form["query"]
+            query = request.form["query"]
             query_embedding = model.encode([query], convert_to_tensor=True)
             similarities = cosine_similarity(query_embedding, title_embeddings)[0]
             best_idx = similarities.argmax()
